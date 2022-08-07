@@ -5,6 +5,7 @@ const router  = express.Router();
 const DB_NAME = 'coral_deep';
 
 router.get('/:id', ( request, response ) => {
+    console.log(`GET -- ${request.baseUrl}`);
     connection.query(`SELECT * FROM ${DB_NAME} WHERE loc_id = ${request.params.id}` , ( err, data ) => {
         const coralData = [
            { 'Type': 'Live COral',  'Count': data.live_coral },
