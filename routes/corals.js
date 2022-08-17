@@ -20,8 +20,6 @@ router.get('/:id/year', (request, response) => {
             response.send( result );
         }
     });
-
-    // connection.end();
 });
 
 router.get('/:id/:year', ( request, response ) => {
@@ -34,8 +32,6 @@ router.get('/:id/:year', ( request, response ) => {
     
     const query = `SELECT * FROM ${ CORAL_DB_NAME } WHERE loc_id = ${ request.params.id } AND monitor_year = ${ request.params.year }`;
     connection.query( query , ( err, results ) => {
-        console.log( results );
-        console.log( results.length );
         if( results.length > 0 ){
             const data = results[0];
             const coralData = [
@@ -48,12 +44,11 @@ router.get('/:id/:year', ( request, response ) => {
             ];
     
             response.send( coralData );
+        }else{
+            response.send({ error: -9999 });
         }
 
-        response.send({ error: -9999 });
     });
-
-    // connection.end();
 });
 
 module.exports = router;
