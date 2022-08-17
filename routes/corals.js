@@ -34,18 +34,22 @@ router.get('/:id/:year', ( request, response ) => {
     
     const query = `SELECT * FROM ${ CORAL_DB_NAME } WHERE loc_id = ${ request.params.id } AND monitor_year = ${ request.params.year }`;
     connection.query( query , ( err, results ) => {
-        const data = results[0];
+        
+        if( results.lenght > 0 ){
+            const data = results[0];
+            const coralData = [
+               { 'Type': 'Hard Coral', 'Count': data.HC_cover },
+               { 'Type': 'Algal Assemblage', 'Count': data.AA_cover },
+               { 'Type': 'Abiotic',          'Count': data.AB_cover },
+               { 'Type': 'Macroalgae',       'Count': data.MA_cover },
+               { 'Type': 'Halimeda',    'Count': data.HA_cover },
+               { 'Type': 'Other Biota', 'Count': data.OB_cover },
+            ];
+    
+            response.send( coralData );
+        }
 
-        const coralData = [
-           { 'Type': 'Hard Coral', 'Count': data.HC_cover },
-           { 'Type': 'Algal Assemblage', 'Count': data.AA_cover },
-           { 'Type': 'Abiotic',          'Count': data.AB_cover },
-           { 'Type': 'Macroalgae',       'Count': data.MA_cover },
-           { 'Type': 'Halimeda',    'Count': data.HA_cover },
-           { 'Type': 'Other Biota', 'Count': data.OB_cover },
-        ];
-
-        response.send( coralData );
+        response.send({ error: -9999 });
     });
 
     // connection.end();
