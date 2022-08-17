@@ -35,8 +35,8 @@ router.get('/:id/:year', ( request, response ) => {
     const query = `SELECT * FROM ${ CORAL_DB_NAME } WHERE loc_id = ${ request.params.id } AND monitor_year = ${ request.params.year }`;
     connection.query( query , ( err, results ) => {
         console.log( results );
-        console.log( results.lenght );
-        if( results.lenght > 0 ){
+        console.log( results.length );
+        if( results.length > 0 ){
             const data = results[0];
             const coralData = [
                { 'Type': 'Hard Coral', 'Count': data.HC_cover },
