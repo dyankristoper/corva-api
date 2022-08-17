@@ -14,6 +14,6 @@ const shallowCoralRouter = require('./routes/corals');
 app.get('/', (request,response)=>{ response.send(`API running!`); })
 
 // Routes
-app.use('v1/shallow-coral', shallowCoralRouter );
+app.use('/v1/shallow-coral', shallowCoralRouter );
  
 app.listen( PORT , () => { console.log(`App is running on port ${PORT}`); })
