@@ -5,6 +5,10 @@ const router  = express.Router();
 const DB_NAME = 'coral_shallow';
 
 router.get('/:id', ( request, response ) => {
+    /* Date time logs of requests */
+    console.log(`GET -- /${request.params.id} | ${ Date.now() }`);
+
+
     connection.query(`SELECT * FROM ${DB_NAME} WHERE loc_id = ${request.params.id}` , ( err, data ) => {
         const coralData = [
            { 'Type': 'Hard Coral', 'Count': data.HC_cover },
