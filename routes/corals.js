@@ -12,10 +12,10 @@ router.get('/:id/year', (request, response) => {
         if(err){ console.log(err); }
     });
 
-    const query = `SELECT year FROM ${ CORAL_DB_NAME } WHERE loc_id = ${ request.params.id }`;
+    const query = `SELECT monitor_year FROM ${ CORAL_DB_NAME } WHERE loc_id = ${ request.params.id }`;
     connection.query( query, ( err, result ) => {
         if(err){
-            response.send( -9999 );
+            response.send({  error: -9999 });
         }else{
             response.send( result );
         }
@@ -32,7 +32,7 @@ router.get('/:id/:year', ( request, response ) => {
         if(err){ console.log(err); }
     });
     
-    const query = `SELECT * FROM ${ CORAL_DB_NAME } WHERE loc_id = ${ request.params.id } AND year = ${ request.params.year }`;
+    const query = `SELECT * FROM ${ CORAL_DB_NAME } WHERE loc_id = ${ request.params.id } AND monitor_year = ${ request.params.year }`;
     connection.query( query , ( err, data ) => {
         const coralData = [
            { 'Type': 'Hard Coral', 'Count': data.HC_cover },
