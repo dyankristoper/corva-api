@@ -21,7 +21,7 @@ router.get('/:id/year', (request, response) => {
         }
     });
 
-    connection.end();
+    // connection.end();
 });
 
 router.get('/:id/:year', ( request, response ) => {
@@ -48,7 +48,7 @@ router.get('/:id/:year', ( request, response ) => {
         response.send( coralData );
     });
 
-    connection.end();
+    // connection.end();
 });
 
 module.exports = router;
