@@ -4,15 +4,9 @@ const router  = express.Router();
 
 const DB_NAME = 'coral_shallow';
 
-router.get('/', ( request, response )=> {
-    console.log(`GET -- / | ${ Date.now() }`);
-    response.send(`Coral Endpoint`);
-});
-
 router.get('/:id', ( request, response ) => {
     /* Date time logs of requests */
-    console.log(`GET -- /${request.params.id} | ${ Date.now() }`);
-
+    console.log(`GET -- /${request.params.id} | ${ Date.now().toLocaleString() }`);
 
     connection.query(`SELECT * FROM ${DB_NAME} WHERE loc_id = ${request.params.id}` , ( err, data ) => {
         const coralData = [
