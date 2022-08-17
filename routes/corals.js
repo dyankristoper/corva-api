@@ -2,13 +2,13 @@ const connection = require('../config');
 const express = require('express');
 const router  = express.Router();
 
-const DB_NAME = 'coral_shallow';
+const CORAL_DB_NAME = 'coral_shallow';
 
 router.get('/:id', ( request, response ) => {
     /* Date time logs of requests */
     console.log(`GET -- /${request.params.id} | ${ new Date() }`);
 
-    // connection.query(`SELECT * FROM ${DB_NAME} WHERE loc_id = ${request.params.id}` , ( err, data ) => {
+    // connection.query(`SELECT * FROM ${CORAL_DB_NAME} WHERE loc_id = ${request.params.id}` , ( err, data ) => {
     //     const coralData = [
     //        { 'Type': 'Hard Coral', 'Count': data.HC_cover },
     //        { 'Type': 'Algal Assemblage', 'Count': data.AA_cover },
@@ -26,7 +26,7 @@ router.get('/:id', ( request, response ) => {
         if(err){ console.log(err); }
     });
 
-    const query = `SELECT 1 + 1 AS Result`;
+    const query = `SELECT * FROM ${CORAL_DB_NAME}`;
     connection.query( query, ( err, result ) => {
         console.log( result );
     });
